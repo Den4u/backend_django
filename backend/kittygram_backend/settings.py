@@ -1,13 +1,17 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+load_dotenv()
 
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+DEBUG = False
+
+ALLOWED_HOSTS = ['84.201.179.92', '127.0.0.1', 'localhost', '4ukitti.serveblog.net']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -90,10 +94,12 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+STATIC_URL = '/stat_back/'
+
+STATIC_ROOT = BASE_DIR / 'stat_back'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/var/www/kittygram/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

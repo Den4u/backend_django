@@ -1,0 +1,5 @@
+IP: 84.201.179.92;
+name_taski: https://myfirsturl.ddns.net/;
+name_kittygram: https://4ukitti.serveblog.net/;
+login: pro100;
+password: 123Gfcc123;

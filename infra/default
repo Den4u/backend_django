@@ -1,0 +1,83 @@
+server {
+    server_name 84.201.179.92 myfirsturl.ddns.net;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location / {
+        root   /var/www/taski;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/myfirsturl.ddns.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/myfirsturl.ddns.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = myfirsturl.ddns.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 84.201.179.92 myfirsturl.ddns.net;
+    return 404; # managed by Certbot
+
+
+}
+
+server {
+    server_name 4ukitti.serveblog.net;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8090;
+    }
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8090;
+    }
+
+    location /media/ {
+        alias /var/www/kittygram/media/;
+    }
+
+    location / {
+        root   /var/www/infra_sprint1;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/4ukitti.serveblog.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/4ukitti.serveblog.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = 4ukitti.serveblog.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name 4ukitti.serveblog.net;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}
